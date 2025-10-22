@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { db, auth } from '../firebaseConfig';
 import { collection, addDoc, serverTimestamp, doc } from 'firebase/firestore'; // <-- Import doc
 
-// 1. Accept 'chatRoomId' as a prop
 function SendMessage({ chatRoomId }) {
   const [input, setInput] = useState('');
 
@@ -12,10 +11,8 @@ function SendMessage({ chatRoomId }) {
 
     const { uid, displayName, photoURL } = auth.currentUser;
     
-    // 2. Create a reference to the correct sub-collection
     const messagesRef = collection(doc(db, 'chatRooms', chatRoomId), 'messages');
 
-    // 3. Add the new message document there
     await addDoc(messagesRef, {
       text: input,
       createdAt: serverTimestamp(),
@@ -35,12 +32,12 @@ function SendMessage({ chatRoomId }) {
         type="text"
         placeholder="Type a message..."
         className="flex-grow px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none"
-        disabled={!chatRoomId} // Disable if no chat is selected
+        disabled={!chatRoomId} 
       />
       <button
         type="submit"
         className="px-6 py-2 ml-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg"
-        disabled={!chatRoomId || input.trim() === ''} // Disable if no chat or no text
+        disabled={!chatRoomId || input.trim() === ''} 
       >
         Send
       </button>

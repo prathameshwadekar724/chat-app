@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { db } from '../firebaseConfig';
 import { collection, onSnapshot, query } from 'firebase/firestore';
 
-// 1. Accept new props: currentUser, onUserSelect, selectedUserId
 function OnlineUsers({ currentUser, onUserSelect, selectedUserId }) {
   const [onlineUsers, setOnlineUsers] = useState([]);
 
@@ -13,7 +12,6 @@ function OnlineUsers({ currentUser, onUserSelect, selectedUserId }) {
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const users = [];
       querySnapshot.forEach((doc) => {
-        // 2. Don't show the logged-in user in the list
         if (doc.data().uid !== currentUser.uid) {
           users.push(doc.data());
         }
@@ -22,7 +20,7 @@ function OnlineUsers({ currentUser, onUserSelect, selectedUserId }) {
     });
 
     return () => unsubscribe();
-  }, [currentUser.uid]); // Re-run if the current user changes
+  }, [currentUser.uid]); 
 
   return (
     <div>
@@ -33,11 +31,10 @@ function OnlineUsers({ currentUser, onUserSelect, selectedUserId }) {
         {onlineUsers.map((user) => (
           <li 
             key={user.uid} 
-            // 3. Make the list item clickable
             onClick={() => onUserSelect(user)}
             className={`flex items-center p-2 rounded-lg cursor-pointer transition-colors ${
               selectedUserId === user.uid 
-                ? 'bg-blue-600' // Highlight the selected user
+                ? 'bg-blue-600' 
                 : 'hover:bg-gray-700'
             }`}
           >

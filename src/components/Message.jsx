@@ -4,10 +4,8 @@ import { auth } from '../firebaseConfig';
 function Message({ message }) {
   const { text, uid, photoURL, displayName } = message;
 
-  // Check if the message is from the currently signed-in user
   const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
   
-  // Dynamic classes for styling
   const containerClass = messageClass === 'sent' 
     ? 'flex flex-row-reverse' 
     : 'flex';
@@ -28,14 +26,12 @@ function Message({ message }) {
       
       <div className={`flex flex-col max-w-xs ${messageClass === 'sent' ? 'items-end' : 'items-start'}`}>
         
-        {/* Only show name on *received* messages */}
         {messageClass === 'received' && (
           <p className="text-xs text-gray-400 mb-1 px-1">
             {displayName || 'Anonymous User'}
           </p>
         )}
 
-        {/* Text Bubble */}
         <div className={`p-2 px-4 ${bubbleClass} shadow`}>
           <p>{text}</p>
         </div>

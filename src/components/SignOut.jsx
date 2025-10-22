@@ -2,7 +2,7 @@ import React from 'react';
 import { auth, db } from '../firebaseConfig';
 import { doc, deleteDoc } from 'firebase/firestore';
 
-function SignOut({ onSignOut }) { // <-- Accept onSignOut prop
+function SignOut({ onSignOut }) { 
   const handleSignOut = async () => {
     try {
       const uid = auth.currentUser.uid;
@@ -11,7 +11,7 @@ function SignOut({ onSignOut }) { // <-- Accept onSignOut prop
       const presenceRef = doc(db, 'presence', uid);
       await deleteDoc(presenceRef);
       
-      onSignOut(); // <-- Call the function to clear selectedUser
+      onSignOut(); 
 
     } catch (error) {
       console.error("Error signing out: ", error);

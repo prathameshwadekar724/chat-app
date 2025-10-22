@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; // <-- Import useState
+import React, { useState, useEffect } from 'react'; 
 import { auth, db } from './firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { doc, setDoc, deleteDoc } from 'firebase/firestore'; 
@@ -10,10 +10,8 @@ import OnlineUsers from './components/OnlineUsers';
 
 function App() {
   const [user, loading, error] = useAuthState(auth);
-  // 1. New state to track which user you're chatting with
   const [selectedUser, setSelectedUser] = useState(null); 
 
-  // ... useEffect for presence logic is the same ...
   useEffect(() => {
     if (user) {
       const presenceRef = doc(db, 'presence', user.uid);

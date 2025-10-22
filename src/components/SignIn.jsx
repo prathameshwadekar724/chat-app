@@ -24,7 +24,6 @@ function SignIn() {
     setError(''); 
 
     if (isRegistering) {
-      // --- Register ---
       if (!displayName) {
         setError('Please enter a display name.');
         return;
@@ -36,7 +35,6 @@ function SignIn() {
         setError(err.message);
       }
     } else {
-      // --- Sign In ---
       try {
         await signInWithEmailAndPassword(auth, email, password);
       } catch (err) {
@@ -48,7 +46,6 @@ function SignIn() {
   return (
     <div className="flex flex-col items-center justify-center h-full max-w-sm mx-auto p-4">
       <div className="w-full bg-gray-800 rounded-lg shadow-xl p-8">
-        {/* --- Tabs --- */}
         <div className="flex border-b border-gray-600 mb-6">
           <button 
             onClick={() => setIsRegistering(false)}
@@ -64,7 +61,6 @@ function SignIn() {
           </button>
         </div>
 
-        {/* --- Email/Pass Form --- */}
         <form onSubmit={handleEmailAuth} className="space-y-4">
           {isRegistering && (
             <input
@@ -101,14 +97,12 @@ function SignIn() {
           </button>
         </form>
 
-        {/* --- Divider --- */}
         <div className="flex items-center my-6">
           <div className="flex-grow border-t border-gray-600"></div>
           <span className="px-4 text-gray-400">OR</span>
           <div className="flex-grow border-t border-gray-600"></div>
         </div>
 
-        {/* --- Google Sign-In --- */}
         <button
           onClick={handleGoogleSignIn}
           className="w-full px-6 py-3 bg-white text-gray-800 font-semibold rounded-lg shadow-lg transition duration-300 flex items-center justify-center hover:bg-gray-200"
